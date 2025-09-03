@@ -2,6 +2,7 @@
 #include "Kruskal.cpp"
 #include "Boruvka.cpp"
 #include "ReverseDelete.cpp"
+#include "Karger.cpp"
 
 int main() {
 
@@ -12,7 +13,8 @@ int main() {
 	//PrimsAlgorithm prim(adjacencyList);
 	//KruskalAlgorithm kruskal(adjacencyList);
 	//BoruvkaAlgorithm boruvka(adjacencyList);
-	DeleteReverseAlgorithm deleteReverse(adjacencyList);
+	//DeleteReverseAlgorithm deleteReverse(adjacencyList);
+	KargerAlgorithm karger(adjacencyList);
 
 	return 0;
 }
