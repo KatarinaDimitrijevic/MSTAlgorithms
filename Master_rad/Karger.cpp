@@ -1,3 +1,5 @@
+#include "Verifier.hpp"
+
 #include <iostream>
 
 #include <vector>
@@ -51,7 +53,29 @@ public:
 	KargerAlgorithm(vector<vector<pair<int, int>>>& adjacencyList)
 		: m_adjacencyList(adjacencyList)
 	{
-		// ovde treba da transformisem ulaz
+		// create initial graph of adjacencyList
+		int n = adjacencyList.size();
+		int index = 0;
+		vector<tuple<int, int, int, int>> edges = {};
+
+		for (int i = 0; i < n; ++i) {
+			for (int j = 0; j < adjacencyList[i].size(); ++j) {
+				if (i < adjacencyList[i][j].first) {
+					int u = i;
+					int v = adjacencyList[i][j].first;
+					int weight = adjacencyList[i][j].second;
+					edges.push_back({u, v, weight, index++});
+				}
+			}
+		}
+
+		Graph graph = Graph(n, edges);
+		unordered_set<int> result = findMST(graph, 0);
+
+		// print result:
+		for (int edgeIndex : result) {
+			cout << "( " << get<0>(graph.edges[edgeIndex]) << ", " << get<1>(graph.edges[edgeIndex]) << ") weight: " << get<2>(graph.edges[edgeIndex]) << endl;
+		}
 	}
 
 	struct Graph {		
@@ -328,7 +352,9 @@ public:
 		}
 
 		// the edges from originalGraph that are MSTF1-heavy.
-		unordered_set<int> heavyEdges = {}; // TODO
+		// this edges are calculated using verify_general_graph from Verifier.cpp, this is used from:
+		// https://github.com/FranciscoThiesen/karger-klein-tarjan/blob/master/verifier/verifier_v2.cpp
+		unordered_set<int> heavyEdges = verify_general_graph(originalGraph.edges, MSTFromF1, originalGraph.nodesNumber);
 
 		// take just non-heavy edges from originalGraph
 		vector<tuple<int, int, int, int>> relevantEdges;
@@ -338,18 +364,17 @@ public:
 			}
 		}
 
-		Graph relevanEdgesGraph = Graph(originalGraph.nodesNumber, relevantEdges);
-		relevanEdgesGraph = removeIsolatedNodes(relevanEdgesGraph);
+		Graph relevantEdgesGraph = Graph(originalGraph.nodesNumber, relevantEdges);
+		relevantEdgesGraph = removeIsolatedNodes(relevantEdgesGraph);
 
 		// apply this algorithm recursively to the relevanEdgesGraph 
-		unordered_set<int> result = findMST(relevanEdgesGraph, seed);
+		unordered_set<int> result = findMST(relevantEdgesGraph, seed);
 		for (const auto& edge : result) {
 			MSTEdges.insert(edge);
 		}
 
 		return MSTEdges;
 	}
-
 
 private:
 	vector<vector<pair<int, int>>>& m_adjacencyList;
