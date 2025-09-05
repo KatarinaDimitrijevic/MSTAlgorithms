@@ -2,7 +2,7 @@
 #include "Kruskal.cpp"
 #include "Boruvka.cpp"
 #include "ReverseDelete.cpp"
-#include "Karger.cpp"
+#include "Karger/Karger.cpp"
 
 int main() {
 
