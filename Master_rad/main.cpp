@@ -3,6 +3,7 @@
 #include "Boruvka.cpp"
 #include "ReverseDelete.cpp"
 #include "Karger/Karger.cpp"
+#include "FredmanTarjan/FredmanTarjan.cpp"
 
 int main() {
 
@@ -33,7 +34,8 @@ int main() {
 	//KruskalAlgorithm kruskal(adjacencyList);
 	//BoruvkaAlgorithm boruvka(adjacencyList);
 	//DeleteReverseAlgorithm deleteReverse(adjacencyList);
-	KargerAlgorithm karger(adjacencyList);
+	//KargerAlgorithm karger(adjacencyList);
+    FredmanTarjan fredmanTarjan(adjacencyList);
 
 	return 0;
 }

@@ -9,7 +9,7 @@ class UnionFind {
 public:
 	UnionFind(int nodesNumber)
 		: m_nodesNumber(nodesNumber)
-		, componentNumber(nodesNumber)
+		, m_componentNumber(nodesNumber)
 		, m_parent(nodesNumber, -1)
 		, m_rang(nodesNumber, 0)
 	{
@@ -54,13 +54,19 @@ public:
 		}
 
 		// important to keep track of number of components (until only one remains)
-		componentNumber--;
+		m_componentNumber--;
 	}
 
+	// checks if x and y belong to the same component 
+	bool connected(int x, int y) {
+		return find(x) == find(y);
+	}
+
+	int getComponentNumber() { return m_componentNumber; }
 
 private:
 	int m_nodesNumber{0};
-	int componentNumber{0};
+	int m_componentNumber{0};
 
 	vector<int> m_parent;
 	vector<int> m_rang;
