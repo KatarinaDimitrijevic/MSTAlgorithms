@@ -1,14 +1,13 @@
-#include "../Utils/UnionFind.cpp"
+#include "../Utils/UnionFind.h"
 #include "../Utils/FibonacciHeap.cpp"
 
 #include <vector>
 #include <queue>
 #include <iostream>
 #include <algorithm>
+#include <unordered_set>
 
 using namespace std;
-
-typedef pair<int, int> branch;
 
 class FredmanTarjan {
 public:
