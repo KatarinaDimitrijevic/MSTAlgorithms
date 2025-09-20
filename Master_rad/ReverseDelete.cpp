@@ -94,7 +94,7 @@ private:
 	void printMST() {
 
 		for (auto it = m_MST.begin(); it != m_MST.end(); it++) {
-			cout << "(" << it->second.first << ", " << it->second.second << ") cene: " << it->first << endl;
+			cout << "(" << it->second.first << ", " << it->second.second << ") weight: " << it->first << endl;
 		}
 	}
 
