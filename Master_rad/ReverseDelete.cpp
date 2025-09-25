@@ -8,15 +8,17 @@ using namespace std;
 
 typedef pair<int, int> branch;
 
-class DeleteReverseAlgorithm {
+class ReverseDeleteAlgorithm {
 public:
-	DeleteReverseAlgorithm(vector<vector<pair<int, int>>>& adjacencyList)
+	ReverseDeleteAlgorithm(vector<vector<pair<int, int>>>& adjacencyList)
 		: m_adjacencyList(adjacencyList)
 		, m_nodesNumber(adjacencyList.size())
 	{
 
 		findMST();
+		
 		printMST();
+		cout << "ReverseDelete: " << m_mstWeight << endl;
 	}
 
 private:
@@ -94,12 +96,16 @@ private:
 	void printMST() {
 
 		for (auto it = m_MST.begin(); it != m_MST.end(); it++) {
-			cout << "(" << it->second.first << ", " << it->second.second << ") weight: " << it->first << endl;
+			// cout << "(" << it->second.first << ", " << it->second.second << ") weight: " << it->first << endl;
+			m_mstWeight += it->first;
 		}
 	}
 
+	size_t getMSTWeight() { return m_mstWeight; }
+
 private:
 	int m_nodesNumber{0};
+	size_t m_mstWeight{ 0 };
 
 	vector<pair<int, branch>> m_MST;
 	vector<vector<pair<int, int>>>& m_adjacencyList;

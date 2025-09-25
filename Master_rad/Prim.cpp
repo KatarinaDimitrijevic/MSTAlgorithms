@@ -17,7 +17,9 @@ public:
 	{
 		initialize();
 		findMST();
+
 		printMST();
+		cout << "Prim: " << m_mstWeight << endl;
 	}
 
 	void initialize(){
@@ -82,14 +84,19 @@ public:
 
 		for (int i = 0; i < m_nodesNumber; i++) {
 			if (m_minBeg != i) {
-				std::cout << "(" << m_parent[i] << "," << i << ") distance: " << m_shortestBranch[i] << std::endl;
+				// std::cout << "(" << m_parent[i] << "," << i << ") distance: " << m_shortestBranch[i] << std::endl;
+				m_mstWeight += m_shortestBranch[i];
 			}
 		}
 	}
 
+	size_t getMSTWeight() { return m_mstWeight; }
+
 private:
 	int m_nodesNumber{0};
 	int m_minBeg{-1};
+
+	size_t m_mstWeight{ 0 };
 
 	vector<int> m_shortestBranch;
 	vector<int> m_parent;

@@ -31,6 +31,8 @@ public:
 		findMST(unionFind);
 
 		printResult();
+
+		cout << "Fredman-Tarjan: " << m_mstWeight << endl;
 	}
 
 public:
@@ -172,15 +174,20 @@ public:
 	void printResult() {
 
 		for (auto& edge : m_result) {
-			cout << "(" << get<0>(edge) << ", " << get<1>(edge) << ") weight: " << get<2>(edge) << ")" << endl;
+			//cout << "(" << get<0>(edge) << ", " << get<1>(edge) << ") weight: " << get<2>(edge) << ")" << endl;
+			m_mstWeight += get<2>(edge);
 		}
 	}
+
+	size_t getMSTWeight() { return m_mstWeight; }
 
 private:
 	// size of the heap that is controlled carefully and different in different recursive calls
 	int m_heapSize{ 0 };
 	int m_nodesNumber{ 0 };
 	int m_edgesNumber{ 0 };
+
+	size_t m_mstWeight{ 0 };
 
 	unordered_set<int> m_nodes;
 	// for the purpose of this algorithm is better to have this form of adjacency list

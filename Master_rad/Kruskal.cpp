@@ -17,7 +17,9 @@ public:
 		, m_unionFind(adjacencyList.size())
  	{
 		findMST();
+
 		printMST();
+		cout << "Kruskal: " << m_mstWeight << endl;
 	}
 
 private:
@@ -67,12 +69,17 @@ private:
 	void printMST() {
 
 		for (auto it = m_MST.begin(); it != m_MST.end(); it++) {
-			cout << "(" << it->second.first << ", " << it->second.second << ") weight: " << it->first << endl;
+			// cout << "(" << it->second.first << ", " << it->second.second << ") weight: " << it->first << endl;
+			m_mstWeight += it->first;
 		}
 	}
 
+	size_t getMSTWeight() { return m_mstWeight; }
+
 private:
 	int m_nodesNumber{0};
+
+	size_t m_mstWeight{ 0 };
 
 	vector<pair<int, branch>> m_MST;
 	vector<vector<pair<int, int>>>& m_adjacencyList;

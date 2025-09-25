@@ -56,9 +56,11 @@ public:
 
         // print result:
         for (int edgeIndex : result) {
-            cout << "( " << get<0>(edges[edgeIndex]) << ", " << get<1>(edges[edgeIndex]) << ") weight: " << get<2>(edges[edgeIndex]) << endl;
+            //cout << "( " << get<0>(edges[edgeIndex]) << ", " << get<1>(edges[edgeIndex]) << ") weight: " << get<2>(edges[edgeIndex]) << endl;
+            m_mstWeight += get<2>(edges[edgeIndex]);
         }
 
+        cout << "Chazelle: " << m_mstWeight << endl;
 	}
 
     list<int> findMST(Graph& graph, int treeHeight, int t = 0)
@@ -115,6 +117,10 @@ public:
         return boruvkaResult;
     }
 
+    size_t getMSTWeight() { return m_mstWeight; }
+
 private:
 	int m_nodesNumber{ 0 };
+
+    size_t m_mstWeight{ 0 };
 };

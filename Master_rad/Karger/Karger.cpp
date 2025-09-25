@@ -74,8 +74,11 @@ public:
 
 		// print result:
 		for (int edgeIndex : result) {
-			cout << "( " << get<0>(graph.edges[edgeIndex]) << ", " << get<1>(graph.edges[edgeIndex]) << ") weight: " << get<2>(graph.edges[edgeIndex]) << endl;
+			//cout << "( " << get<0>(graph.edges[edgeIndex]) << ", " << get<1>(graph.edges[edgeIndex]) << ") weight: " << get<2>(graph.edges[edgeIndex]) << endl;
+			m_mstWeight += get<2>(graph.edges[edgeIndex]);
 		}
+
+		cout << "Karger: " << m_mstWeight << endl;
 	}
 
 	struct Graph {		
@@ -376,6 +379,10 @@ public:
 		return MSTEdges;
 	}
 
+	size_t getMSTWeight() { return m_mstWeight; }
+
 private:
+	size_t m_mstWeight{ 0 };
+
 	vector<vector<pair<int, int>>>& m_adjacencyList;
 };
