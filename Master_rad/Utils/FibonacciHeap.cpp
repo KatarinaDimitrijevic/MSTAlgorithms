@@ -13,7 +13,11 @@ struct comparator
 {
 	bool operator() (const pair<int, int>& a, const pair<int, int>& b) const
 	{
-		return a.second > b.second;
+		if (a.second != b.second) {
+			return a.second > b.second;
+		}
+
+		return a.first > b.first;
 	}
 };
 

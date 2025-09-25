@@ -39,8 +39,8 @@ public:
 	// unionFind parameter is a struct that has info about connected components
 	void findMST(UnionFind& unionFind) {
 
-		if (!m_heapSize) m_heapSize = m_edgesNumber / m_nodesNumber;
-		else m_heapSize = pow(2, m_heapSize);
+		if (!m_heapSize) m_heapSize = max(1, m_edgesNumber / max(1, m_nodesNumber));
+		else m_heapSize = max(1, (int)pow(2, (double)m_heapSize));
 
 		// all nodes that have been already added to the heap
 		unordered_set<int> visited;
