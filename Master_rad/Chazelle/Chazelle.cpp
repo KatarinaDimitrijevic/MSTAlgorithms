@@ -7,6 +7,11 @@
 #include <iostream>
 #include <algorithm>
 
+#include <chrono>
+
+using Clock = std::chrono::steady_clock;
+using ms = std::chrono::duration<double, std::milli>;
+
 using namespace std;
 
 namespace
@@ -46,6 +51,7 @@ public:
             }
         }
 
+        auto start = Clock::now();
         // create graph
         Graph graph = Graph(edges);
 
@@ -53,6 +59,9 @@ public:
         int height = MST::findMaxHeight(graph, MST::c);
 
         list<int> result = findMST(graph, height);
+        auto end = Clock::now();
+
+        m_duration = std::chrono::duration_cast<ms>(end - start).count();
 
         // print result:
         for (int edgeIndex : result) {
@@ -119,8 +128,11 @@ public:
 
     size_t getMSTWeight() { return m_mstWeight; }
 
+    double getDuration() { return m_duration; }
+
 private:
 	int m_nodesNumber{ 0 };
 
     size_t m_mstWeight{ 0 };
+    double m_duration{ 0 };
 };

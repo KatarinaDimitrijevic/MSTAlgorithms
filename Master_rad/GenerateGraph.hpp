@@ -15,6 +15,8 @@
 #include <iterator> 
 #include <algorithm>
 
+// code used for generating connected undirected graphs
+ 
 namespace mstgen {
 
     using BGLGraph = boost::adjacency_list<

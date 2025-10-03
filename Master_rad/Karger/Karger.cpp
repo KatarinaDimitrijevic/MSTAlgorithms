@@ -12,9 +12,12 @@
 #include <functional>
 #include <utility>
 
+#include <chrono>
+
 using namespace std;
 
-typedef pair<int, int> branch;
+using Clock = std::chrono::steady_clock;
+using ms = std::chrono::duration<double, std::milli>;
 
 template <typename T> inline void hash_combine(std::size_t& seed, const T& value)
 {
@@ -70,7 +73,12 @@ public:
 		}
 
 		Graph graph = Graph(n, edges);
+
+		auto start = Clock::now();
 		unordered_set<int> result = findMST(graph, 0);
+		auto end = Clock::now();
+
+		m_duration = std::chrono::duration_cast<ms>(end - start).count();
 
 		// print result:
 		for (int edgeIndex : result) {
@@ -370,7 +378,7 @@ public:
 		Graph relevantEdgesGraph = Graph(originalGraph.nodesNumber, relevantEdges);
 		relevantEdgesGraph = removeIsolatedNodes(relevantEdgesGraph);
 
-		// apply this algorithm recursively to the relevanEdgesGraph 
+		// apply this algorithm recursively to the relevantEdgesGraph 
 		unordered_set<int> result = findMST(relevantEdgesGraph, seed);
 		for (const auto& edge : result) {
 			MSTEdges.insert(edge);
@@ -381,8 +389,11 @@ public:
 
 	size_t getMSTWeight() { return m_mstWeight; }
 
+	double getDuration() { return m_duration; }
+
 private:
 	size_t m_mstWeight{ 0 };
+	double m_duration{ 0 };
 
 	vector<vector<pair<int, int>>>& m_adjacencyList;
 };

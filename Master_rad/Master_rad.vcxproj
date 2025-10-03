@@ -118,6 +118,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Katarina\boost_1_89_0\boost_1_89_0</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,10 +130,37 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Boruvka.cpp" />
+    <ClCompile Include="Chazelle\Chazelle.cpp" />
+    <ClCompile Include="Chazelle\Graph.cpp" />
+    <ClCompile Include="Chazelle\MSTUtils.cpp" />
+    <ClCompile Include="Chazelle\SoftHeapDecorator.cpp" />
+    <ClCompile Include="Chazelle\Tree.cpp" />
+    <ClCompile Include="Chazelle\TreeBuilder.cpp" />
+    <ClCompile Include="Chazelle\TreeSubgraph.cpp" />
+    <ClCompile Include="FredmanTarjan\FredmanTarjan.cpp" />
+    <ClCompile Include="Karger\Karger.cpp" />
+    <ClCompile Include="Karger\LCA.cpp" />
+    <ClCompile Include="Karger\Verifier.cpp" />
     <ClCompile Include="Kruskal.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Prim.cpp" />
     <ClCompile Include="ReverseDelete.cpp" />
+    <ClCompile Include="Utils\FibonacciHeap.cpp" />
+    <ClCompile Include="Utils\UnionFind.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Chazelle\Graph.h" />
+    <ClInclude Include="Chazelle\MSTUtils.h" />
+    <ClInclude Include="Chazelle\SoftHeapDecorator.h" />
+    <ClInclude Include="Chazelle\SoftHeap\SoftHeap.h" />
+    <ClInclude Include="Chazelle\SoftHeap\Utils.h" />
+    <ClInclude Include="Chazelle\Tree.h" />
+    <ClInclude Include="Chazelle\TreeBuilder.h" />
+    <ClInclude Include="Chazelle\TreeSubgraph.h" />
+    <ClInclude Include="GenerateGraph.hpp" />
+    <ClInclude Include="Karger\LCA.hpp" />
+    <ClInclude Include="Karger\Verifier.hpp" />
+    <ClInclude Include="Utils\UnionFind.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

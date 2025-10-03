@@ -7,7 +7,12 @@
 #include <algorithm>
 #include <unordered_set>
 
+#include <chrono>
+
 using namespace std;
+
+using Clock = std::chrono::steady_clock;
+using ms = std::chrono::duration<double, std::milli>;
 
 class FredmanTarjan {
 public:
@@ -27,8 +32,12 @@ public:
 			m_adjacencyList[i] = currentNeighbors;
 		}
 
+		auto start = Clock::now();
 		UnionFind unionFind(m_nodesNumber);
 		findMST(unionFind);
+		auto end = Clock::now();
+
+		m_duration = std::chrono::duration_cast<ms>(end - start).count();
 
 		printResult();
 
@@ -58,7 +67,7 @@ public:
 				unordered_map<int, fibonacciHeapHandle>nodePosition;
 
 				// take all neighbors of the current node
-				auto neighbors = m_adjacencyList[i];
+				const auto& neighbors = m_adjacencyList[i];
 
 				// go through all the neighbors of i
 				for (auto neighbor = neighbors.begin(); neighbor != neighbors.end(); neighbor++) {
@@ -91,7 +100,7 @@ public:
 					unionFind.unionOperation(i, currentNode.first);
 				
 					// go through current's node neighbors
-					auto currentNodeNeighbors = m_adjacencyList[currentNode.first];
+					const auto& currentNodeNeighbors = m_adjacencyList[currentNode.first];
 					fibonacciHeapHandle currentPosition;
 
 					for (auto currentNodeNeighbor = currentNodeNeighbors.begin(); currentNodeNeighbor != currentNodeNeighbors.end(); currentNodeNeighbor++) {
@@ -181,6 +190,8 @@ public:
 
 	size_t getMSTWeight() { return m_mstWeight; }
 
+	double getDuration() { return m_duration; }
+
 private:
 	// size of the heap that is controlled carefully and different in different recursive calls
 	int m_heapSize{ 0 };
@@ -188,6 +199,7 @@ private:
 	int m_edgesNumber{ 0 };
 
 	size_t m_mstWeight{ 0 };
+	double m_duration{ 0 };
 
 	unordered_set<int> m_nodes;
 	// for the purpose of this algorithm is better to have this form of adjacency list
